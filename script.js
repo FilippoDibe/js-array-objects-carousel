@@ -37,4 +37,17 @@ images.forEach(item => {
     const imageContainer = document.createElement('div');
     imageContainer.classList.add('image-container');
     // immagine src
+    const image = document.createElement('img');
+    image.src = item.image;
 
+    // titolo 
+    const title = document.createElement('div');
+    title.classList.add('title');
+    title.textContent = item.title;
+
+    // contenuto testo 
+    const text = document.createElement('div');
+    text.classList.add('text');
+    text.textContent = item.text;
+
+    // mandare tutto nel carosello 
