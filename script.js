@@ -35,6 +35,7 @@ const images = [
     caroselloItemContent = `<h2>${images.title}</h2><p>${images.text}</p>`;
 
     caroselloItem.innerHTML = caroselloItemContent;
-    carosello.
+    carosello.appendChild(caroselloItem);
   }
 
+  const caroselloOggetto = document.querySelectorAll('.carousel-item')
