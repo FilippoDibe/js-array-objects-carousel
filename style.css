@@ -3,3 +3,37 @@
     padding: 0;
     box-sizing: border-box;
 }
+#carousel {
+    display: flex;
+    overflow: hidden;
+    width: 800px;
+    height: 500px;
+  }
+
+  .carousel-item {
+    min-width: 100%;
+    transition: transform 0.5s ease-in-out;
+
+  }
+
+  /* Stili per la visualizzazione delle immagini e del testo */
+  .image-container {
+    text-align: center;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+
+  }
+
+  .title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+
+  .text {
+    font-size: 16px;
+    margin-top: 5px;
+  }
