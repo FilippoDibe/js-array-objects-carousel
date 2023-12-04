@@ -51,3 +51,11 @@ images.forEach(item => {
     text.textContent = item.text;
 
     // mandare tutto nel carosello 
+
+    imageContainer.appendChild(image);
+    imageContainer.appendChild(title);
+    imageContainer.appendChild(text);
+    carouselItem.appendChild(imageContainer);
+
+    carousel.appendChild(carouselItem);
+  });
