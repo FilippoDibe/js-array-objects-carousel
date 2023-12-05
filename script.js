@@ -23,39 +23,62 @@ const images = [
         title: "Marvel's Avengers", 
         text: 'Marvel\'s Avengers is an epic, third-person, action-adventure game that combines an original, cinematic story with single-player and co-operative gameplay.',
     }
-  ];
-// agiunta del contenitore 
-const carousel = document.getElementById('carousel');
+];
 
-// popolare dinamicamente il carosello
-images.forEach(item => {
-    // div carousel item 
-    const carouselItem = document.createElement('div');
-    carouselItem.classList.add('carousel-item');
+const items = document.getElementsByClassName('item');
+let activeIndex = 0;
 
-    // immagine container 
-    const imageContainer = document.createElement('div');
-    imageContainer.classList.add('image-container');
-    // immagine src
-    const image = document.createElement('img');
-    image.src = item.image;
+const next = document.querySelector("#next");
+const back = document.querySelector("#back");
 
-    // titolo 
-    const title = document.createElement('div');
-    title.classList.add('title');
-    title.textContent = item.title;
+// Popola il carosello con le immagini dall'array
+images.forEach((img, index) => {
+    const item = document.createElement('div');
+    item.classList.add('item');
+    if (index === 0) {
+        item.classList.add('active');
+    }
 
-    // contenuto testo 
-    const text = document.createElement('div');
-    text.classList.add('text');
-    text.textContent = item.text;
+    const thumbnail = document.createElement('div');
+    thumbnail.classList.add('thumbnail');
+    thumbnail.innerHTML = `<img src="${img.image}" alt="${img.title}">`;
+    thumbnail.addEventListener('click', () => showImage(index));
 
-    // mandare tutto nel carosello 
+    item.innerHTML = `
+        <img src="${img.image}" alt="${img.title}">
+        <div class="info">
+            <h2>${img.title}</h2>
+            <p>${img.text}</p>
+        </div>
+    `;
 
-    imageContainer.appendChild(image);
-    imageContainer.appendChild(title);
-    imageContainer.appendChild(text);
-    carouselItem.appendChild(imageContainer);
+    items[index] = item;
+    document.querySelector('.container-items').appendChild(item);
+    document.querySelector('.thumbnails-container').appendChild(thumbnail);
+});
 
-    carousel.appendChild(carouselItem);
-  });
+// Aggiungi il comportamento del carosello
+next.addEventListener('click', showNext);
+back.addEventListener('click', showPrev);
+
+function showNext() {
+    updateCarousel((activeIndex + 1) % items.length);
+}
+
+function showPrev() {
+    updateCarousel((activeIndex - 1 + items.length) % items.length);
+}
+
+function showImage(index) {
+    updateCarousel(index);
+}
+
+function updateCarousel(index) {
+    items[activeIndex].classList.remove('active');
+    document.querySelector('.thumbnails-container').querySelector('.thumbnail.active-thumbnail').classList.remove('active-thumbnail');
+
+    activeIndex = index;
+
+    items[activeIndex].classList.add('active');
+    document.querySelector('.thumbnails-container').querySelectorAll('.thumbnail')[activeIndex].classList.add('active-thumbnail');
+}
